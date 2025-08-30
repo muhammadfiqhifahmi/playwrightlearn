@@ -1,0 +1,79 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-page;success-login-to-website",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Success Login To Website",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 3747845457
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "I access the login page",
+            "match": {
+              "location": "tests/steps/login.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2187469041
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "I input username and password",
+            "match": {
+              "location": "tests/steps/login.steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217750416
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "I should be logged in successfully",
+            "match": {
+              "location": "tests/steps/login.steps.js:29"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10392000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 170661541
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-page",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Login Page",
+    "tags": [],
+    "uri": "tests/features/login.feature"
+  }
+]
