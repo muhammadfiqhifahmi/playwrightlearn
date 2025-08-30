@@ -1,5 +1,6 @@
-const { chromium } = require('playwright');
-const { Before, After, Given, When, Then, Status, setDefaultTimeout } = require('@cucumber/cucumber');
+const { test, chromium, expect } = require('@playwright/test');
+const { Before, After, Given, When, Then, Status, AfterStep, setDefaultTimeout } = require('@cucumber/cucumber');
+
 
 let browser;
 let context;
@@ -17,20 +18,34 @@ Given('I access the login page', async function () {
   await page.goto('https://www.saucedemo.com/');
 });
 
-When('I input username and password', async function () {
+When('I input username {string} and password {string}', async function (username, password) {
   // Replace with actual code to input username and password
   await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill("standard_user");
+  await page.locator('[data-test="username"]').fill(username);
   await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill("secret_sauce");
+  await page.locator('[data-test="password"]').fill(password);
   await page.locator('[data-test="login-button"]').click();
 });
 
 Then('I should be logged in successfully', async function () {
-  // Replace with actual code to verify successful login
   await page.waitForSelector('[data-test="add-to-cart-sauce-labs-backpack"]');
+});
+
+
+Then('I should see an error message', async function () {
+  // const errorMessageLocator = page.locator('[data-test="error"]');
+  // await expect(errorMessageLocator).toHaveText('Epic sadface: Username and password do not match any user in this service');
+  // await page.locator('[data-test="login-button"]').toBeVisible();
+  await expect(page.getByText('Epic sadface: Username and password do not match any user in this service')).toBeVisible();
 });
 
 After(async function () {
   await browser.close();
 })
+
+AfterStep(async function ({ pickle, result }) {
+  if (result.status === Status.PASSED || result.status === Status.FAILED) { // Capture for both passed and failed steps
+    const screenshot = await page.screenshot();
+    await this.attach(screenshot, 'image/png');
+  }
+});
